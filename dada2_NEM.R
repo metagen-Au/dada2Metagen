@@ -244,7 +244,7 @@ for(sam in samNames) {
   ddF <- dada(derepF, err=errF, multithread=TRUE)
   derepR <- derepFastq(Rs[[sam]])
   ddR <- dada(derepR, err=errR, multithread=TRUE)
-  merger <- mergePairs(ddF, derepF, ddR, derepR)
+  merger <- mergePairs(ddF, derepF, ddR, derepR,trimOverhang = TRUE) 
 
 
   no_reads<- data.frame(denoisedF= getN(ddF),
