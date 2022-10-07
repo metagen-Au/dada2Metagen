@@ -18,7 +18,7 @@ getN <- function(x) sum(getUniques(x))
 
 run = opt$run 
 
-seq_path = file.path(getwd(),"/",paste0(run),"/16s/")
+seq_path = file.path(getwd(),"/",paste0(run),"/16S/")
 dir.create(paste0(seq_path,"output"))
 output_path =file.path(paste0(seq_path,"output/"))
 dir.create(paste0(output_path,"SV_tables"))
