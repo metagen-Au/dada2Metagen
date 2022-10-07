@@ -32,30 +32,32 @@ path.cut <- file.path(paste0(seq_path, "cutadapt/"))
 ID<- paste0(Sys.Date(),"_",run,"_18S_" )
 
 fns <- sort(list.files(seq_path, full.names = TRUE)) # or fns <- sort(list.files( full.names = TRUE))
-
+fns2<- gsub("fastq","fastq",tolower(basename(fns)))
+file.rename(list.files(seq_path,full.names = TRUE),paste0(seq_path,fns2))
 
 # Sort files by fwd and rvs
 
-fnFs <- fns[grepl("R1.fq.gz",fns)]
+fnFs <- fns[grepl("r1",fns)]
 # Check fastq naming convention.
 if(length(fnFs)==0){
+  message("Naming of files maybe incorrect.")
 
-  fns2<- gsub("fastq","fq",basename(fns))
+  fns2<- gsub("fq","fastq",basename(fns))
   file.rename(list.files(seq_path,full.names = TRUE),paste0(seq_path,fns2))
 
-  fnFs <- fns[grepl("R1.fq.gz",fns)]
-  fnRs <- fns[grepl("R2.fq.gz",fns)]
+  fnFs <- fns[grepl("r1",fns)]
+  fnRs <- fns[grepl("r2",fns)]
 
 }else{
 
-  fnRs <- fns[grepl("R2.fq.gz",fns)]
+  fnRs <- fns[grepl("r2",fns)]
 
 }
 print(fnFs)
 
 # Fix the names up, make sure there is matching damples
-namesF<- sapply(strsplit(basename(fnFs), "_18S"), `[`, 1)
-namesR<- sapply(strsplit(basename(fnRs), "_18S"), `[`, 1)
+namesF<- sapply(strsplit(basename(fnFs), "_18s"), `[`, 1)
+namesR<- sapply(strsplit(basename(fnRs), "_18s"), `[`, 1)
 match(namesF,namesR)
 
 names(fnFs)<-names(fnRs)<- namesF
@@ -166,10 +168,10 @@ post_trim<- rbind(
 write(post_trim,paste0(run_path,ID,"_post_trim_check.txt"))
 write(pre_trim,paste0(run_path,ID,"_pre_trim_check.txt"))
 
-if(sum(grepl("fq",list.files(path.cut)))==0){
-fq<- "fastq"
+if(sum(grepl("fastq",list.files(path.cut)))==0){
+fq<- "fq"
 }else{
-  fq<- "fq"
+  fq<- "fastq"
 }
 
 cutFs <- sort(list.files(path.cut, pattern = paste0("r1.",fq ,".gz"), full.names = TRUE))
