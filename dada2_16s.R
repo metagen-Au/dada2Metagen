@@ -45,19 +45,19 @@ fns <- sort(list.files(seq_path, full.names = TRUE)) # or fns <- sort(list.files
 
 # Sort files by fwd and rvs
 
-fnFs <- fns[grepl("R1.fastq.gz",fns)]
+fnFs <- fns[grepl("R1",fns)]
 # Check fastq naming convention.
 if(length(fnFs)==0){
 
   fns2<- gsub("fastq","fastq",basename(fns))
   file.rename(list.files(seq_path,full.names = TRUE),paste0(seq_path,fns2))
 
-  fnFs <- fns[grepl("R1.fastq.gz",fns)]
-  fnRs <- fns[grepl("R2.fastq.gz",fns)]
+  fnFs <- fns[grepl("R1",fns)]
+  fnRs <- fns[grepl("R2",fns)]
 
 }else{
 
-  fnRs <- fns[grepl("R2.fastq.gz",fns)]
+  fnRs <- fns[grepl("R2",fns)]
 
 }
 print(fnFs)
@@ -172,10 +172,10 @@ post_trim<- rbind(
 write(post_trim,paste0(run_path,ID,"_post_trim_check.txt"))
 write(pre_trim,paste0(run_path,ID,"_pre_trim_check.txt"))
 
-if(sum(grepl("fq",list.files(path.cut)))==0){
-fq<- "fastq"
+if(sum(grepl("fastq",list.files(path.cut)))==0){
+fq<- "fq"
 }else{
-  fq<- "fq"
+  fq<- "fastq"
 }
 
 cutFs <- sort(list.files(path.cut, pattern = paste0("r1.",fq ,".gz"), full.names = TRUE))
@@ -191,8 +191,8 @@ head(sample.names)
 filtFs <- file.path(path.cut, "filtered", basename(cutFs))
 filtRs <- file.path(path.cut, "filtered", basename(cutRs))
 
-namesF<- sapply(strsplit(basename(cutFs), "r1"), `[`, 1)
-namesR<- sapply(strsplit(basename(cutRs), "r2"), `[`, 1)
+namesF<- sapply(strsplit(basename(cutFs), "R1"), `[`, 1)
+namesR<- sapply(strsplit(basename(cutRs), "R2"), `[`, 1)
 
 
 
@@ -223,8 +223,8 @@ if(sum(remove==TRUE)==0){
 
 
 
-samNames<- sapply(strsplit(basename(Fs),"_r1"),"[",1)
-samNamesR<- sapply(strsplit(basename(Rs),"_r2"),"[",1)
+samNames<- sapply(strsplit(basename(Fs),"_R1"),"[",1)
+samNamesR<- sapply(strsplit(basename(Rs),"_R2"),"[",1)
 match(samNames,samNamesR)
 
 names(Fs)<-samNames
