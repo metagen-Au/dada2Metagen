@@ -175,14 +175,9 @@ post_trim<- rbind(
 write(post_trim,paste0(run_path,ID,"_post_trim_check.txt"))
 write(pre_trim,paste0(run_path,ID,"_pre_trim_check.txt"))
 
-if(sum(grepl("fastq",list.files(path.cut)))==0){
-fq<- "fq"
-}else{
-  fq<- "fastq"
-}
 
-cutFs <- sort(list.files(path.cut, pattern = paste0("r1.",fq ,".gz"), full.names = TRUE))
-cutRs <- sort(list.files(path.cut, pattern =paste0("r2.",fq ,".gz"), full.names = TRUE))
+cutFs <- sort(list.files(path.cut, pattern = paste0("r1"), full.names = TRUE))
+cutRs <- sort(list.files(path.cut, pattern =paste0("r2"), full.names = TRUE))
 
 
 
