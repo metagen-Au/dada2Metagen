@@ -18,7 +18,7 @@ getN <- function(x) sum(getUniques(x))
 
 run = opt$run 
 
-seq_path = file.path(getwd(),"/",paste0(run),"/16S/")
+seq_path = file.path(getwd(),"/",paste0(run),"/16s/")
 dir.create(paste0(seq_path,"output"))
 output_path =file.path(paste0(seq_path,"output/"))
 dir.create(paste0(output_path,"SV_tables"))
@@ -41,30 +41,32 @@ ID<- paste0(Sys.Date(),"_",run,"_16S_" )
 #seq_path<-  "P:/soil_health_reports/bioinformatics/Report_Fastqs/16122020/metagen11/16S/"
 #ps_path<- "P:/soil_health_reports/phyloseq_objects/"
 fns <- sort(list.files(seq_path, full.names = TRUE)) # or fns <- sort(list.files( full.names = TRUE))
-
+fns2<- gsub("fastq","fastq",tolower(basename(fns)))
+file.rename(list.files(seq_path,full.names = TRUE),paste0(seq_path,fns2))
 
 # Sort files by fwd and rvs
 
-fnFs <- fns[grepl("R1",fns)]
+fnFs <- fns[grepl("r1",fns)]
 # Check fastq naming convention.
 if(length(fnFs)==0){
+  message("Naming of files maybe incorrect.")
 
-  fns2<- gsub("fastq","fastq",basename(fns))
+  fns2<- gsub("fq","fastq",basename(fns))
   file.rename(list.files(seq_path,full.names = TRUE),paste0(seq_path,fns2))
 
-  fnFs <- fns[grepl("R1",fns)]
-  fnRs <- fns[grepl("R2",fns)]
+  fnFs <- fns[grepl("r1",fns)]
+  fnRs <- fns[grepl("r2",fns)]
 
 }else{
 
-  fnRs <- fns[grepl("R2",fns)]
+  fnRs <- fns[grepl("r2",fns)]
 
 }
 print(fnFs)
 
 # Fix the names up, make sure there is matching damples
-namesF<- sapply(strsplit(basename(fnFs), "_16S"), `[`, 1)
-namesR<- sapply(strsplit(basename(fnRs), "_16S"), `[`, 1)
+namesF<- sapply(strsplit(basename(fnFs), "_16s"), `[`, 1)
+namesR<- sapply(strsplit(basename(fnRs), "_16s"), `[`, 1)
 match(namesF,namesR)
 
 names(fnFs)<-names(fnRs)<- namesF
@@ -191,8 +193,8 @@ head(sample.names)
 filtFs <- file.path(path.cut, "filtered", basename(cutFs))
 filtRs <- file.path(path.cut, "filtered", basename(cutRs))
 
-namesF<- sapply(strsplit(basename(cutFs), "R1"), `[`, 1)
-namesR<- sapply(strsplit(basename(cutRs), "R2"), `[`, 1)
+namesF<- sapply(strsplit(basename(cutFs), "r1"), `[`, 1)
+namesR<- sapply(strsplit(basename(cutRs), "r2"), `[`, 1)
 
 
 
@@ -223,8 +225,8 @@ if(sum(remove==TRUE)==0){
 
 
 
-samNames<- sapply(strsplit(basename(Fs),"_R1"),"[",1)
-samNamesR<- sapply(strsplit(basename(Rs),"_R2"),"[",1)
+samNames<- sapply(strsplit(basename(Fs),"_r1"),"[",1)
+samNamesR<- sapply(strsplit(basename(Rs),"_r2"),"[",1)
 match(samNames,samNamesR)
 
 names(Fs)<-samNames
