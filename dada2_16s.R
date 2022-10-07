@@ -40,7 +40,7 @@ print(path.cut)
 ID<- paste0(Sys.Date(),"_",run,"_16S_" )
 #seq_path<-  "P:/soil_health_reports/bioinformatics/Report_Fastqs/16122020/metagen11/16S/"
 #ps_path<- "P:/soil_health_reports/phyloseq_objects/"
-fns <- sort(list.files(seq_path, full.names = TRUE)) # or fns <- sort(list.files( full.names = TRUE))
+fns <- list.files(seq_path, full.names = TRUE) # or fns <- sort(list.files( full.names = TRUE))
 fns2<- tolower(basename(fns))
 file.rename(list.files(seq_path,full.names = TRUE),paste0(seq_path,fns2))
 
