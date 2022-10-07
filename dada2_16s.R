@@ -45,19 +45,19 @@ fns <- sort(list.files(seq_path, full.names = TRUE)) # or fns <- sort(list.files
 
 # Sort files by fwd and rvs
 
-fnFs <- fns[grepl("r1.fq.gz",fns)]
+fnFs <- fns[grepl("R1.fq.gz",fns)]
 # Check fastq naming convention.
 if(length(fnFs)==0){
 
   fns2<- gsub("fastq","fq",basename(fns))
   file.rename(list.files(seq_path,full.names = TRUE),paste0(seq_path,fns2))
 
-  fnFs <- fns[grepl("r1.fq.gz",fns)]
-  fnRs <- fns[grepl("r2.fq.gz",fns)]
+  fnFs <- fns[grepl("R1.fq.gz",fns)]
+  fnRs <- fns[grepl("R2.fq.gz",fns)]
 
 }else{
 
-  fnRs <- fns[grepl("r2.fq.gz",fns)]
+  fnRs <- fns[grepl("R2.fq.gz",fns)]
 
 }
 print(fnFs)
@@ -73,7 +73,7 @@ if(any(is.na(match(namesF,namesR)))){
 }
 
 message(paste0("You have: ", length(fnFs)," samples"))
-toplot<- sample(length(fnFs),ifelse(length(fnFs)<10,5,10))
+toplot<- sample(length(fnFs),ifelse(length(fnFs)<10,length(fnFs),10))
 
 qual_plots_fwd<-qual_plots_rvs<-  vector("list",length=length(toplot))
 for(k in seq_along(toplot)){
