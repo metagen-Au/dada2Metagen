@@ -30,20 +30,20 @@ path.cut <- file.path(paste0(seq_path, "cutadapt/"))
 #Create file path, get files
 
 ID<- paste0(Sys.Date(),"_",run,"_18S_" )
+fns <- list.files(seq_path, full.names = TRUE) # or fns <- sort(list.files( full.names = TRUE))
 
-fns <- sort(list.files(seq_path, full.names = TRUE)) # or fns <- sort(list.files( full.names = TRUE))
-fns2<- gsub("fastq","fastq",tolower(basename(fns)))
+fns2<- tolower(basename(fns))
+
+print(length(fns2))
+print(length(fns))
 file.rename(list.files(seq_path,full.names = TRUE),paste0(seq_path,fns2))
 
 # Sort files by fwd and rvs
-
+fns <- list.files(seq_path, full.names = TRUE) # or fns <- sort(list.files( full.names = TRUE))
 fnFs <- fns[grepl("r1",fns)]
 # Check fastq naming convention.
 if(length(fnFs)==0){
   message("Naming of files maybe incorrect.")
-
-  fns2<- gsub("fq","fastq",basename(fns))
-  file.rename(list.files(seq_path,full.names = TRUE),paste0(seq_path,fns2))
 
   fnFs <- fns[grepl("r1",fns)]
   fnRs <- fns[grepl("r2",fns)]
