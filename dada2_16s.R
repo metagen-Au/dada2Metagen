@@ -41,22 +41,19 @@ ID<- paste0(Sys.Date(),"_",run,"_16S_" )
 #seq_path<-  "P:/soil_health_reports/bioinformatics/Report_Fastqs/16122020/metagen11/16S/"
 #ps_path<- "P:/soil_health_reports/phyloseq_objects/"
 fns <- list.files(seq_path, full.names = TRUE) # or fns <- sort(list.files( full.names = TRUE))
-print(fns)
+
 fns2<- tolower(basename(fns))
-print(fns2)
+
 print(length(fns2))
 print(length(fns))
 file.rename(list.files(seq_path,full.names = TRUE),paste0(seq_path,fns2))
 
 # Sort files by fwd and rvs
-
+fns <- list.files(seq_path, full.names = TRUE) # or fns <- sort(list.files( full.names = TRUE))
 fnFs <- fns[grepl("r1",fns)]
 # Check fastq naming convention.
 if(length(fnFs)==0){
   message("Naming of files maybe incorrect.")
-
-  fns2<- gsub("fq","fastq",basename(fns))
-  file.rename(list.files(seq_path,full.names = TRUE),paste0(seq_path,fns2))
 
   fnFs <- fns[grepl("r1",fns)]
   fnRs <- fns[grepl("r2",fns)]
