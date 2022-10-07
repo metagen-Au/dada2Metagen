@@ -45,19 +45,19 @@ fns <- sort(list.files(seq_path, full.names = TRUE)) # or fns <- sort(list.files
 
 # Sort files by fwd and rvs
 
-fnFs <- fns[grepl("R1.fq.gz",fns)]
+fnFs <- fns[grepl("R1.fastq.gz",fns)]
 # Check fastq naming convention.
 if(length(fnFs)==0){
 
-  fns2<- gsub("fastq","fq",basename(fns))
+  fns2<- gsub("fastq","fastq",basename(fns))
   file.rename(list.files(seq_path,full.names = TRUE),paste0(seq_path,fns2))
 
-  fnFs <- fns[grepl("R1.fq.gz",fns)]
-  fnRs <- fns[grepl("R2.fq.gz",fns)]
+  fnFs <- fns[grepl("R1.fastq.gz",fns)]
+  fnRs <- fns[grepl("R2.fastq.gz",fns)]
 
 }else{
 
-  fnRs <- fns[grepl("R2.fq.gz",fns)]
+  fnRs <- fns[grepl("R2.fastq.gz",fns)]
 
 }
 print(fnFs)
@@ -84,12 +84,12 @@ for(k in seq_along(toplot)){
 
 
 
-ggsave(arrangeGrob(grobs= qual_plots_fwd[1:9],ncol=3),
+ggsave(arrangeGrob(grobs= qual_plots_fwd[1:length(toplot)],ncol=3),
        file=paste0(run_path,"FWD_qc",ID,".png"),
        dpi=250,units="cm",height=30,width=30)
 
 
-ggsave(arrangeGrob(grobs= qual_plots_rvs[1:9],ncol=3),
+ggsave(arrangeGrob(grobs= qual_plots_rvs[1:length(toplot)],ncol=3),
        file=paste0(run_path,"RVS_qc",ID,".png"),
        dpi=250,units="cm",height=30,width=30)
 
