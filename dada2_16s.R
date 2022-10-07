@@ -42,6 +42,8 @@ ID<- paste0(Sys.Date(),"_",run,"_16S_" )
 #ps_path<- "P:/soil_health_reports/phyloseq_objects/"
 fns <- list.files(seq_path, full.names = TRUE) # or fns <- sort(list.files( full.names = TRUE))
 fns2<- tolower(basename(fns))
+print(length(fns2))
+print(length(fns))
 file.rename(list.files(seq_path,full.names = TRUE),paste0(seq_path,fns2))
 
 # Sort files by fwd and rvs
