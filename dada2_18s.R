@@ -174,8 +174,9 @@ fq<- "fq"
   fq<- "fastq"
 }
 
-cutFs <- sort(list.files(path.cut, pattern = paste0("r1.",fq ,".gz"), full.names = TRUE))
-cutRs <- sort(list.files(path.cut, pattern =paste0("r2.",fq ,".gz"), full.names = TRUE))
+# May need to change this in the future- the pattern maybe repeated in a sample name. Need to avoid this.
+cutFs <- sort(list.files(path.cut, pattern = paste0("r1"), full.names = TRUE))
+cutRs <- sort(list.files(path.cut, pattern =paste0("r2"), full.names = TRUE))
 
 
 
