@@ -274,6 +274,7 @@ write.csv(chimeric_reads,paste0(run_path,ID,"chimeric_read_log.csv"))
 
 
 #getN <- function(x) sum(getUniques(x))
-#track <- data.frame(out, plyr::ldply(reads_passed,data.frame(nochim.seqtab),chimera_sum= chimera_sum, chimeric_sv=chimera_svs)
+track <- cbind(do.call('rbind',reads_passed), 
+                               data.frame(reads_denoised=no_reads,final_reads=rowSums(nochim.seqtab),chimera_sum= chimera_sum, chimeric_sv=chimera_svs))
 
 write.csv(track,paste0(run_path,ID,"dada2_read_log.csv"))
