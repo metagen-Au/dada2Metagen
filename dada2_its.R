@@ -15,10 +15,6 @@ getN <- function(x) sum(getUniques(x))
 
 run = opt$run 
 
-if(run!= "ITS"){
-  stop('This script is for ITS only.')
-}
-
 seq_path = file.path(getwd(),"/",paste0(run),"/ITS/")
 dir.create(paste0(seq_path,"output"))
 output_path =file.path(paste0(seq_path,"output/"))
