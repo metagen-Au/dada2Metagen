@@ -19,7 +19,7 @@ library(dada2);#library(DECIPHER) # load packages for sequence variants, taxomic
 run = opt$run
 group = opt$group
 
-stopifnot(group %in% c("16S","18S","NEM"))
+stopifnot(group %in% c("16S","18S","NEM","ITS"))
 
 print(1)
 
@@ -60,7 +60,15 @@ tax<- assignTaxonomy(getSequences(colnames(nochim.seqtab)),
                        "16S_database.fa.gz",
                        minBoot = 80 ,tryRC=TRUE , multithread = TRUE)
 
+}else if(group=="ITS"){
+
+  tax<- assignTaxonomy(getSequences(colnames(nochim.seqtab)),
+                       "its_database.fa.gz",
+                       minBoot = 60 ,tryRC=TRUE , multithread = TRUE)
+
 }
+
+
 
 
 saveRDS(tax,paste0(sv_path,"taxonomy_",group,"_",run,'.RDS'))
