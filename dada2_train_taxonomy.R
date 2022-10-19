@@ -63,7 +63,7 @@ tax<- assignTaxonomy(getSequences(colnames(nochim.seqtab)),
 }else if(group=="ITS"){
 
   tax<- assignTaxonomy(getSequences(colnames(nochim.seqtab)),
-                       "its_database.fa.gz",
+                       "its_database.fasta",
                        minBoot = 60 ,tryRC=TRUE , multithread = TRUE)
 
 }
