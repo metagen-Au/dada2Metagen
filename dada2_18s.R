@@ -116,7 +116,7 @@ fnRs.filtN <- file.path(seq_path, "filtN", basename(fnRs))
 
 
 filterAndTrim(fnFs, fnFs.filtN,
-              fnRs, fnRs.filtN, maxN = 0, multithread =TRUE)
+              fnRs, fnRs.filtN, maxN = 0, multithread =TRUE, matchIDs=TRUE)
 
 message("MERGED RAW reads. ")
 
