@@ -202,6 +202,7 @@ out<- filterAndTrim(cutFs,filtFs ,
                     cutRs,filtRs ,
                     maxEE=c(eef,eer),
                     truncLen = c(270,240),
+                    truncQ=0,
                     minLen = 50,maxN = 0,
                     compress=TRUE,verbose=TRUE,matchIDs = TRUE,
                     rm.phix = TRUE)
