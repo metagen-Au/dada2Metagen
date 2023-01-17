@@ -200,7 +200,7 @@ namesR<- sapply(strsplit(basename(cutRs), "_r2"), `[`, 1)
 
 out<- filterAndTrim(cutFs,filtFs ,
                     cutRs,filtRs ,
-                    maxEE=c(eef,eer),
+                    maxEE=c(eef,Inf),
                     truncLen = c(270,240),
                     truncQ=0,
                     minLen = 50,maxN = 0,
