@@ -42,14 +42,14 @@ nochim.seqtab<- readRDS(paste0(sv_path,nc))
 
 if(group=="18S"){
 tax<- assignTaxonomy(getSequences(colnames(nochim.seqtab)),
-                     "18S_database.fasta.gz",
+                     "18S_database.fasta.gz",multithread=TRUE,
                      minBoot = 60 ,
                      tryRC=TRUE,
                      taxLevels =c("Domain",  "Kingdom", "Phylum" , "Class"  , "Order" ,  "Family" , "Genus" , "Species") )
 
 }else if(group=="NEM"){
   tax<- assignTaxonomy(getSequences(colnames(nochim.seqtab)),
-                       "18S_database.fasta.gz",
+                       "18S_database.fasta.gz",multithread=TRUE,
                        minBoot = 60 ,
                        tryRC=TRUE,
                        taxLevels =c("Domain",  "Kingdom", "Phylum" , "Class"  , "Order" ,  "Family" , "Genus" , "Species") )
